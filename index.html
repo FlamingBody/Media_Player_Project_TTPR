@@ -2,11 +2,36 @@
 <html>
     <head>
         <title>Media Player</title>
-        <link ref="stylesheet" href="index.css">
+        <link rel="stylesheet" href="index.css" />
     </head>
     <body>
-        <header></header>
-        <main></main>
+        <header>
+            <h1>Media Player</h1>
+            <div>Free access to a dozen of songs</div>
+        </header>
+        <main>
+            <div>
+                <scroll id="playList">
+
+                </scroll>
+            </div>
+            <div id="display" class="play">
+                <div class="title">
+                    <img src="img/Castle in the Sky.png">
+                </div>
+                <div class="progressBar">
+                    <div class="progress">
+                        <div class="progressScroll"></div>
+                    </div>
+                </div>
+                <div class="controlButton">
+                    <span><img src="img/fast_back_icon.png" width="50px"></span>
+                    <span><img src="img/play_icon.png" width="50px"></span>
+                    <span><img src="img/fast_forward_icon.png" width="50px"></span>
+                </div>
+
+            </div>
+        </main>
         <footer>
             <script src="index.js"></script>
         </footer>

@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Media Player</title>
-        <link rel="stylesheet" href="index.css" />
-    </head>
-    <body>
-        <header>
-            <h1>Media Player</h1>
-            <div>Free access to a dozen of songs</div>
-        </header>
-        <main>
-            <div>
-                <scroll id="playList">
+  <head>
+    <title>Media Player</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Media Player</h1>
+      </div>
+      <div id="sound">
+        <div class="volumnBar">
+          <div class="volumn"></div>
+        </div>
+        <button class="soundBTN"><img src="img/volumn_on.png" width="50px"></button>
+      </div>
+    </header>
+    <main>
+      <div>
+        <h2>Free access to a dozen of songs</h2>
+        <div id="playList">
+        </div>
+      </div>
+      <div id="display" class="play">
+        <div class="close">
+          <button class="close"><img src="img/close_icon.png" width="50px" height="50px"/></button>
+        </div>
+        <div class="title">
+          <img class="title" src="img/Castle_in_the_Sky.png"/>
+        </div>
 
-                </scroll>
-            </div>
-            <div id="display" class="play">
-                <div class="title">
-                    <img src="img/Castle in the Sky.png">
-                </div>
-                <div class="progressBar">
-                    <div class="progress">
-                        <div class="progressScroll"></div>
-                    </div>
-                </div>
-                <div class="controlButton">
-                    <span><img src="img/fast_back_icon.png" width="50px"></span>
-                    <span><img src="img/play_icon.png" width="50px"></span>
-                    <span><img src="img/fast_forward_icon.png" width="50px"></span>
-                </div>
+        <div class="progressBar">
+          <div class="progress">
+            <div class="progressScroll"></div>
+          </div>
+        </div>
 
-            </div>
-        </main>
-        <footer>
-            <script src="index.js"></script>
-        </footer>
-    </body>
+        <div class="videoLength">
+          <div class="current">0:00</div>
+          <div class="end">0:00</div>
+        </div>
+
+        <audio id = "audio" src="songs/Castle_in_the_Sky.mp3""></audio>
+        <div class="controlButton">
+          <span><img class="rewind" src="img/rewind_icon.png" width="50px" /></span>
+          <span><img class="start" src="img/play_icon.png" width="50px" /></span>
+          <span><img class="fast_forward" src="img/fast_forward_icon.png" width="50px" /></span>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="index.js"></script>
+    </footer>
+  </body>
 </html>

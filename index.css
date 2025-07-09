@@ -1,21 +1,132 @@
+:root{
+    --font-size: 3rem;
+    --padding: 20px;
+    --window-size: 500px;
+    --display-size: 80%;
+    --border-radius: 50px;
+    --playList-size: 400px;
+
+}
+
 *{
+    transition: width 0.2s, height 0.2s, transform 0.2s;
     margin: 0;
     padding: 0;
+    text-align: center;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: var(--padding);
+    margin-bottom: calc(var(--padding)*3);
+    justify-content:space-between;
+    background-image: linear-gradient(#468DC5,#020C26, rgb(2,12,38,0.8), rgb(2,12,38,0));
+}
+
+#sound{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid white;
+}
+
+.volumnBar{
+    width: calc(var(--window-size)/5);
+    height: 10px;
+    background-color:rgb(160, 160, 160);
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+    display: flex;
+    flex-direction: row-reverse;
+    border: 1px solid black;
+
+}
+
+.volumn{
+    width: calc(var(--window-size)/6);
+    height: 100%;
+    background-color:rgb(255, 0, 0);
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+
+body{
+    background-color: rgba(0, 0, 0, 0.391);
+    background-image: url("img/backdrop.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+h1{
+    font-size: var(--font-size);
+    padding: var(--padding);
+}
+
+h2{
+    padding: calc(var(--padding)*3);
+    font-size: 2rem;
+}
+
+main{
+    display: flex;
+    align-content: center;
+    justify-content:center;
 }
 
 #playList{
     overflow: scroll;
     white-space: nowrap;
+    height:max-content;
+    background-image: linear-gradient(rgb(154, 145, 137), rgb(0,0,0));
+    border-radius: var(--border-radius);
+    
 }
 
+#playList > div{
+    width: calc(var(--playList-size) / 2);
+    height: calc(var(--playList-size) * 3 / 5);
+    display: inline-block;
+    border-radius: var(--border-radius);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: auto;
+    color: white;
+    font-size: 1rem;
+    font-style: italic;
+    padding: var(--padding);
+    margin: var(--padding);
+}
+
+#playList > div:hover{
+    transform: scale(1.05,1.05);
+}
+
+
+
 .play{
-    position: absolute;
-    width: 100%;
-    background-color: aqua;
+    width: var(--window-size);
+    background-color: rgb(241, 214, 166, 0.6);
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+}
+
+div.close{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items:flex-end;
+    justify-content: flex-end;
 }
 
 .title{
@@ -26,24 +137,24 @@
 }
 
 .title > img{
-    width: 50%;
-    height: 100%;
+    width: calc(var(--display-size));
+    height: 300px;
 }
 
 .progressBar{
     background-color: whitesmoke;
-    border-radius: 50px;
+    border-radius: var(--border-radius);
     height: 10px;
-    width: 50%;
+    width: var(--display-size);
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    
     border: 1px solid black;
 }
 .progress{
     background-color: grey;
-    border-radius: 50px;
+    border-radius: var(--border-radius);
     height: 100%;
-    width: 50%;
+    width: 0;
     display: flex;
     align-items: flex-end;
     justify-content:flex-end;
@@ -55,14 +166,54 @@
     height: 10px;
     background-color: white;
     border: 1px solid black;
-    border-radius: 50px;
+    border-radius: var(--border-radius);
+}
+
+.videoLength{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: var(--display-size);
+    margin-bottom: 1rem;
 }
 
 .controlButton{
     background-color: beige;
-    width: 50%;
+    width: var(--display-size);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 1800px){
+    :root{
+        --playList-size: 300px;
+    }
+
+    .title > img{
+        
+        height: 400px;
+    }
+}
+
+@media (max-width: 1200px){
+    :root{
+        --playList-size: 200px;
+    }
+    .title > img{
+        
+        height: 300px;
+    }
+}
+
+@media (max-width: 960px){
+    :root{
+        --playList-size: 100px;
+    }
+    .title > img{
+
+        height: 200px;
+    }
+}
+

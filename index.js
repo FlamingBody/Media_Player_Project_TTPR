@@ -9,9 +9,9 @@ const volumeBar = document.querySelector(".volumeBar");
 const progressBar = document.querySelector(".progressBar");
 const scrollList = document.querySelector("#scrollList");
 const computerStyle = getComputedStyle(rootElement)
-const scrollAmount = 150; 
+const scrollAmount = 120; 
 const testing = computerStyle.getPropertyValue('--playList-size');
-alert(testing);
+//alert(testing);
 
 //Setting up Songs:
 //const songs = ["Castle_in_the_Sky",
@@ -33,8 +33,11 @@ songs.forEach(song => {
 $("#shuffle").click(function(){
     shuffle = !shuffle;
     if (shuffle){
+        $("main").css("justify-content", "space-around");
+        $(".play").css("display", "flex");
+        //document.querySelector(".end").innerHTML = `${duration}`;
+        selected = true;
         pause(".start");
-
         songSelector(songs[generateRandomNumber()].value)
         start(".start");
     }
@@ -46,19 +49,23 @@ $(".soundBTN").click(function(){
 })
 
 $("#scrollLeft").click(function(){
+    /*
     scrollList.scrollTo({
         left: scrollAmount,
         behavior: 'smooth'
     });
-    //scrollList.scrollLeft -= scrollAmount;
+    */
+    scrollList.scrollLeft -= scrollAmount;
 })
 
 $("#scrollRight").click(function(){
+    /*
     scrollList.scrollTo({
         right: scrollAmount,
         behavior: 'smooth'
     });
-    //scrollList.scrollLeft += scrollAmount;
+    */
+    scrollList.scrollLeft += scrollAmount;
 })
 
 $(".song").click(function(){

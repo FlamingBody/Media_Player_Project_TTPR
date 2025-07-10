@@ -4,7 +4,7 @@
     --window-size: 500px;
     --display-size: 80%;
     --border-radius: 50px;
-    --playList-size: 400px;
+    --playList-size: 300px;
 
 }
 
@@ -33,24 +33,24 @@ header{
     border: 1px solid white;
 }
 
-.volumnBar{
+.volumeBar{
     width: calc(var(--window-size)/5);
     height: 10px;
     background-color:rgb(160, 160, 160);
-    border-top-left-radius: var(--border-radius);
-    border-bottom-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     border: 1px solid black;
 
 }
 
-.volumn{
+.volume{
     width: calc(var(--window-size)/6);
     height: 100%;
     background-color:rgb(255, 0, 0);
-    border-top-left-radius: var(--border-radius);
-    border-bottom-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
     display: flex;
     flex-direction: row-reverse;
 
@@ -59,9 +59,9 @@ header{
 body{
     background-color: rgba(0, 0, 0, 0.391);
     background-image: url("img/backdrop.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: repeat;
     color: white;
+    padding-bottom: calc(var(--padding));
 }
 
 h1{
@@ -76,20 +76,68 @@ h2{
 
 main{
     display: flex;
-    align-content: center;
+    align-items: center;
+    justify-content:center;
+    margin-bottom: calc(var(--padding)*3);
+}
+
+main > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content:center;
 }
 
-#playList{
-    overflow: scroll;
-    white-space: nowrap;
-    height:max-content;
-    background-image: linear-gradient(rgb(154, 145, 137), rgb(0,0,0));
-    border-radius: var(--border-radius);
-    
+table#infoDisplay{
+    border: 1px solid azure;
+    background-color: rgb(0, 0, 0, 0.5);
 }
 
-#playList > div{
+th{
+    border: 1px solid azure;
+    height: calc(var(--font-size)*2);
+}
+
+#playList{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-image: linear-gradient(rgb(154, 145, 137), rgb(0,0,0));
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+    width: calc(var(--playList-size));
+}
+
+.scroll{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: calc(var(--playList-size) * 3 / 5);
+    padding: calc(var(--padding)/2);
+    background-color:rgb(195, 207, 207);
+    border: 1px solid black;
+}
+
+.scroll:active{
+    background-color: aqua;
+}
+
+#scrollList{
+    
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: calc(var(--playList-size));
+
+}
+
+#scrollList{
+    scroll-behavior:smooth;
+}
+
+#scrollList > div{
     width: calc(var(--playList-size) / 2);
     height: calc(var(--playList-size) * 3 / 5);
     display: inline-block;
@@ -104,7 +152,7 @@ main{
     margin: var(--padding);
 }
 
-#playList > div:hover{
+#scrollList > div:hover{
     transform: scale(1.05,1.05);
 }
 
@@ -118,25 +166,30 @@ main{
     align-items: center;
     justify-content: center;
     padding: var(--padding);
-    border-radius: var(--border-radius);
+    border-radius: calc(var(--border-radius)/2);
 }
 
-div.close{
+div.mini-tab{
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items:flex-end;
-    justify-content: flex-end;
+    justify-content: space-between;
+}
+button.close{
+    border-radius: var(--border-radius);
+    border-style: none;
+    background-color: transparent;
 }
 
-.title{
+div.title{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.title > img{
+div.title > img{
     width: calc(var(--display-size));
     height: 300px;
 }
@@ -186,20 +239,10 @@ div.close{
     justify-content: center;
 }
 
-@media (max-width: 1800px){
-    :root{
-        --playList-size: 300px;
-    }
-
-    .title > img{
-        
-        height: 400px;
-    }
-}
-
 @media (max-width: 1200px){
     :root{
-        --playList-size: 200px;
+        --playList-size: 250px;
+        --padding: 15px;
     }
     .title > img{
         
@@ -207,13 +250,21 @@ div.close{
     }
 }
 
-@media (max-width: 960px){
+@media (max-width: 800px){
     :root{
-        --playList-size: 100px;
+        --playList-size: 175px;
+        --padding: 10px;
     }
-    .title > img{
 
-        height: 200px;
+    main{
+        flex-direction: column;
+        height: 800px;
     }
+
+    .title > img{
+        height: 350px;
+    }
+    
+
 }
 

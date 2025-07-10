@@ -9,24 +9,31 @@
       <div>
         <h1>Media Player</h1>
       </div>
-      <div id="sound">
-        <div class="volumnBar">
-          <div class="volumn"></div>
-        </div>
-        <button class="soundBTN"><img src="img/volumn_on.png" width="50px"></button>
-      </div>
+      <button id="shuffle"><img src="img/shuffle_icon.webp" width="50px"></button>
     </header>
     <main>
       <div>
-        <h2>Free access to a dozen of songs</h2>
+        <h2>Free access to of songs</h2>
         <div id="playList">
+          <button id="scrollLeft" class="scroll"> < </button>
+          <div id="scrollList">
+
+          </div>
+          <button id="scrollRight" class="scroll"> > </button>
         </div>
       </div>
       <div id="display" class="play">
-        <div class="close">
+        <div class="mini-tab">
+          <div id="sound">
+            <button class="soundBTN"><img src="img/volumn_on.png" width="50px"></button>
+            <div class="volumeBar">
+              <div class="volume"></div>
+            </div>
+          </div>
           <button class="close"><img src="img/close_icon.png" width="50px" height="50px"/></button>
         </div>
         <div class="title">
+          <h3 class="title">Castle in the Sky</h3>
           <img class="title" src="img/Castle_in_the_Sky.png"/>
         </div>
 
@@ -49,6 +56,20 @@
         </div>
       </div>
     </main>
+    <section>
+      <table id="infoDisplay" width="100%">
+        <tr>
+          <th>Song</th>
+          <th>Title</th>
+          <th>Duration</th>
+        </tr>
+        <tr>
+          <th id="songTitle">---</th>
+          <th id="author">---</th>
+          <th id="duration">---</th>
+        </tr>
+      </table>
+    </section>
     <footer>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <script src="index.js"></script>

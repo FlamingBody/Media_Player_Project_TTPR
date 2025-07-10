@@ -1,36 +1,77 @@
 
 var selected = false
 var playing = false;
-//var audio = new Audio("songs/Castle_in_the_Sky.mp3");;
-const audio = document.querySelector("audio")
+var shuffle = false;
+const rootElement = document.documentElement;
+const title = document.querySelector("h3.title");
+const audio = document.querySelector("audio");
+const volumeBar = document.querySelector(".volumeBar");
 const progressBar = document.querySelector(".progressBar");
+const scrollList = document.querySelector("#scrollList");
+const computerStyle = getComputedStyle(rootElement)
+const scrollAmount = 150; 
+const testing = computerStyle.getPropertyValue('--playList-size');
+alert(testing);
 
 //Setting up Songs:
-const songs = ["Castle_in_the_Sky",
-    "fnaf1", "fnaf2"]
+//const songs = ["Castle_in_the_Sky",
+//    "fnaf1", "fnaf2"]
+
+const songs = [{title: "Castle in the Sky", author: "AI", value: "Castle_in_the_Sky", song: "Castle_in_the_Sky"},
+        {title: "FNAF 1 Song", author: "The Living Tomestone", value: "fnaf1", song: "fnaf1"}, 
+        {title: "FNAF 2 Song", author: "The Living Tomestone", value: "fnaf2", song: "fnaf2"}]
 
 songs.forEach(song => {
     var songIcon = document.createElement("div");
     songIcon.classList.add("song");
-    songIcon.setAttribute("value", `${song}`) 
-    songIcon.style.backgroundImage = "url(" + `img/${song}.png` + ")"
+    songIcon.setAttribute("value", `${song.value}`) 
+    songIcon.style.backgroundImage = "url(" + `img/${song.song}.png` + ")"
 
-    document.querySelector("#playList").appendChild(songIcon);
+    document.querySelector("div#playList div#scrollList").appendChild(songIcon);
 });
 
+$("#shuffle").click(function(){
+    shuffle = !shuffle;
+    if (shuffle){
+        pause(".start");
+
+        songSelector(songs[generateRandomNumber()].value)
+        start(".start");
+    }
+    
+})
+
 $(".soundBTN").click(function(){
-    $(".volumnBar").toggle();
+    $(".volumeBar").toggle();
+})
+
+$("#scrollLeft").click(function(){
+    scrollList.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+    });
+    //scrollList.scrollLeft -= scrollAmount;
+})
+
+$("#scrollRight").click(function(){
+    scrollList.scrollTo({
+        right: scrollAmount,
+        behavior: 'smooth'
+    });
+    //scrollList.scrollLeft += scrollAmount;
 })
 
 $(".song").click(function(){
     var song = $(this).attr("value");
     $(".start").attr("src", "img/play_icon.png")
+    songSelector(song);
+    //var duration = formatTime(audio.duration);
     if (!selected){
         $("main").css("justify-content", "space-around");
         $(".play").css("display", "flex");
+        //document.querySelector(".end").innerHTML = `${duration}`;
         selected = true;
     }
-    songSelector(song);
     start($(".start"));
 });
 
@@ -104,6 +145,12 @@ function rewind(button){
     audio.currentTime = rewind;
 }
 
+function volumeControl(){
+    var volumePercentage = audio.volume * 100;
+    $(".volume").css("width", `${volumePercentage}`);
+
+}
+
 function formatTime(currentTime){
     const minutes = Math.floor(currentTime/60);
     const sec = Math.floor(currentTime % 60);
@@ -116,27 +163,36 @@ function updateProgress() {
     //alert(progressPercent);
     $(".progress").css("width", `${progressPercent}%`);
     $(".current").html(formatTime(audio.currentTime));
+    $(".end").html(formatTime(audio.duration));
+    $("#duration").html(formatTime(audio.duration));
 };
 
+function formatSong(index){
+    $("img.title").attr("src", `img/${songs[index].song}.png`)
+    audio.setAttribute("src", `songs/${songs[index].song}.mp3`);
+
+    //var duration = formatTime(audio.duration);
+
+    title.innerHTML = `${songs[index].title}`;
+    document.querySelector("#songTitle").innerHTML = `${songs[index].title}`;
+    document.querySelector("#author").innerHTML = `${songs[index].author}`;
+    //document.querySelector("#duration").innerHTML = `${duration}`;
+}
 
 function songSelector(key){
     switch (key){
-        case `${songs[0]}`:
-            $("img.title").attr("src", `img/${songs[0]}.png`)
-            audio.setAttribute("src", `songs/${songs[0]}.mp3`);
+        case `${songs[0].value}`:
+            formatSong(0)
             break;
-        case `${songs[1]}`:
-            $("img.title").attr("src", `img/${songs[1]}.png`);
-            audio.setAttribute("src", `songs/${songs[1]}.mp3`);
+        case `${songs[1].value}`:
+            formatSong(1)
             break;
-        case `${songs[2]}`:
-            $("img.title").attr("src", `img/${songs[2]}.png`);
-            audio.setAttribute("src", `songs/${songs[2]}.mp3`);
+        case `${songs[2].value}`:
+            formatSong(2)
             break;
 
         default:
-            $("img.title").attr("src", `img/${songs[0]}.png`);
-            audio.setAttribute("src", `songs/${songs[0]}.mp3`);
+            formatSong(0)
             break;
     }
 }
@@ -145,6 +201,14 @@ function generateRandomNumber(){
     let randomNum = Math.floor(Math.random() * songs.length)
     return randomNum
 }
+
+volumeBar.addEventListener("click", (e) => {
+    const width = volumeBar.clientWidth;
+    const clickX = e.offsetX;
+    const maxVolume = 1;
+    audio.volume = (clickX/width)*maxVolume;
+    
+})
 
 progressBar.addEventListener("click", (e) => {
     const width = progressBar.clientWidth;
@@ -155,12 +219,16 @@ progressBar.addEventListener("click", (e) => {
 
 audio.addEventListener('timeupdate', updateProgress);
 
+audio.addEventListener("timeupdate", volumeControl);
+
 audio.addEventListener("ended", ()=>{
-    pause(".start");
+    if (shuffle){
+        pause(".start");
 
-    songSelector(songs[generateRandomNumber()])
-    start(".start");
-
+        songSelector(songs[generateRandomNumber()].value)
+        start(".start");
+    }
+    
 })
 
-$(".volumnBar").toggle();
+$(".volumeBar").toggle();

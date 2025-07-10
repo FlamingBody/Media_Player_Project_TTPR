@@ -202,6 +202,7 @@ function songSelector(key){
             formatSong(0)
             break;
     }
+    audio.volume = 1;
 }
 
 function generateRandomNumber(){
@@ -239,3 +240,4 @@ audio.addEventListener("ended", ()=>{
 })
 
 $(".volumeBar").toggle();
+

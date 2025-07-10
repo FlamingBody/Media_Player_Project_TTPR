@@ -22,7 +22,7 @@ header{
     padding: var(--padding);
     margin-bottom: calc(var(--padding)*3);
     justify-content:space-between;
-    background-image: linear-gradient(#468DC5,#020C26, rgb(2,12,38,0.8), rgb(2,12,38,0));
+    background-image: linear-gradient(#468DC5,#020C26, rgb(2,12,38,0.8), #468DC5);
 }
 
 #sound{
@@ -251,7 +251,7 @@ div.title > img{
     }
 }
 
-@media (max-width: 800px){
+@media (max-width: 1000px){
     :root{
         --playList-size: 175px;
         --padding: 10px;
